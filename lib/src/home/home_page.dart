@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hasuraexample/src/home/home_bloc.dart';
 import 'package:hasuraexample/src/models/country_model.dart';
+import 'package:hasuraexample/src/state/state_page.dart';
 
 import 'home_module.dart';
 
@@ -24,18 +25,21 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Home"),
       ),
-      body: StreamBuilder<List<Country>>(
+      body: StreamBuilder<List<CountryModel>>(
         stream: _bloc.outCountries,
         builder: (context, snapshot) {
           if (!snapshot.hasData) return CircularProgressIndicator();
 
           return ListView(
-              children: snapshot.data.map((country) {            
-             return ListTile(
-              title: Text(
-                country.name
-              ),
+              children: snapshot.data.map((country) {
+            return ListTile(
+              title: Text(country.name),
               trailing: Icon(Icons.arrow_right),
+              onTap: () {
+                print("object");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => StatePage(country)));
+              },
             );
           }).toList());
         },

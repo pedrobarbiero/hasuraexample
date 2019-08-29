@@ -7,24 +7,27 @@ class HomeRepository extends Disposable {
 
   HomeRepository(this.connection);
 
-  Future<List<Country>> getCountries() async {
+  Future<List<CountryModel>> getCountries() async {
     String qry = """ 
     {
       countries{
         country_id
         name
+        states{
+          name
+        }
       }
     }
     """;
 
     var result = await connection.query(qry);
     var dynamics = result["data"]["countries"]
-        .map((item) => Country.fromJson(item))
+        .map((item) => CountryModel.fromJson(item))
         .toList();
 
-    var countries = List<Country>();
+    var countries = List<CountryModel>();
     for (var din in dynamics) {
-      countries.add(din as Country);
+      countries.add(din as CountryModel);
     }
     return countries;
   }

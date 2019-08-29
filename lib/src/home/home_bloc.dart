@@ -7,14 +7,14 @@ import 'package:rxdart/rxdart.dart';
 class HomeBloc extends BlocBase {
   var _repository = HomeModule.to.getDependency<HomeRepository>();
 
-  Future<List<Country>> getCountries() async {
+  Future<List<CountryModel>> getCountries() async {
     List<dynamic> countries = await _repository.getCountries();
     _countriesController.sink.add(countries);
     return countries;
   }
 
-  var _countriesController = BehaviorSubject<List<Country>>();
-  Observable<List<Country>> get outCountries => _countriesController.stream;
+  var _countriesController = BehaviorSubject<List<CountryModel>>();
+  Observable<List<CountryModel>> get outCountries => _countriesController.stream;
 
   @override
   void dispose() {

@@ -1,17 +1,25 @@
+import 'package:hasuraexample/src/models/country_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'state_model.g.dart';
 
 @JsonSerializable()
-class State {
+class StateModel {
   @JsonKey(name: 'state_id')
   int stateId;
 
+  @JsonKey(name: 'country_id')
+  int countryId;
+
+  @JsonKey(name: "country")
+  CountryModel country;
+
   String name;
 
-  State({this.name, this.stateId});
+  StateModel({this.name, this.stateId, this.countryId});
 
-  factory State.fromJson(Map<String, dynamic> json) => _$StateFromJson(json);
+  factory StateModel.fromJson(Map<String, dynamic> json) =>
+      _$StateModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$StateToJson(this);
+  Map<String, dynamic> toJson() => _$StateModelToJson(this);
 }
