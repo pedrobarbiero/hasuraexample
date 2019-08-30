@@ -11,7 +11,7 @@ class AppModule extends ModuleWidget {
         Bloc((i) => AddStateBloc()),
         Bloc((i) => StateBloc()),
         Bloc((i) => AppBloc()),
-      ];
+      ]; 
 
   @override
   List<Dependency> get dependencies => [];
