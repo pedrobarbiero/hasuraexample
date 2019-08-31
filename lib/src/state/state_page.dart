@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hasuraexample/src/models/country_model.dart';
+import 'package:hasuraexample/src/models/state_model.dart';
 import 'package:hasuraexample/src/state/add_state_page.dart';
 
 class StatePage extends StatefulWidget {
@@ -27,11 +28,12 @@ class _StatePageState extends State<StatePage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          var state = await Navigator.push<StateModel>(
               context,
               MaterialPageRoute(
                   builder: (context) => AddStatePage(widget.country)));
+          widget.country.states.add(state);
         },
       ),
     );

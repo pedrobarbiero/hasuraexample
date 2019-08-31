@@ -4,7 +4,7 @@ import 'package:hasuraexample/src/models/country_model.dart';
 import 'package:hasuraexample/src/state/add_state_bloc.dart';
 
 class AddStatePage extends StatefulWidget {
-  final CountryModel country;
+  final CountryModel country;  
 
   AddStatePage(this.country);
   @override
@@ -37,9 +37,8 @@ class _AddStatePageState extends State<AddStatePage> {
             RaisedButton(
                 child: Text("Save"),
                 onPressed: () async {
-                  var retorno = await _bloc.create();                  
-                  widget.country.states.add(retorno);
-                  Navigator.pop(context);
+                  var state = await _bloc.create();                                  
+                  Navigator.pop(context, state);
                 })
           ],
         ),
