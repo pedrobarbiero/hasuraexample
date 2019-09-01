@@ -1,9 +1,12 @@
 import 'package:hasura_connect/hasura_connect.dart';
+import 'package:hasuraexample/src/app_bloc.dart';
 import 'package:hasuraexample/src/home/home_repository.dart';
 import 'package:hasuraexample/src/home/home_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:hasuraexample/src/home/home_page.dart';
+import 'package:hasuraexample/src/state/add_state_bloc.dart';
+import 'package:hasuraexample/src/state/state_bloc.dart';
 import 'package:hasuraexample/src/state/state_repository.dart';
 
 class HomeModule extends ModuleWidget {
@@ -12,6 +15,9 @@ class HomeModule extends ModuleWidget {
   @override
   List<Bloc> get blocs => [
         Bloc((i) => HomeBloc()),
+        Bloc((i) => AddStateBloc()),
+        Bloc((i) => StateBloc()),
+        Bloc((i) => AppBloc()),
       ];
 
   @override

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hasuraexample/src/home/home_module.dart';
 import 'package:hasuraexample/src/models/country_model.dart';
 import 'package:hasuraexample/src/models/state_model.dart';
 import 'package:hasuraexample/src/state/add_state_page.dart';
+import 'package:hasuraexample/src/state/state_bloc.dart';
 
 class StatePage extends StatefulWidget {
   final CountryModel country;
@@ -12,6 +14,8 @@ class StatePage extends StatefulWidget {
 }
 
 class _StatePageState extends State<StatePage> {
+  var _bloc = HomeModule.to.getBloc<StateBloc>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +25,16 @@ class _StatePageState extends State<StatePage> {
       body: ListView.builder(
         itemCount: widget.country.states.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(widget.country.states[index].name),
-          );
+          StateModel state = widget.country.states[index];
+          return Dismissible(
+              key: Key(state.stateId.toString()),
+              onDismissed: (direction) async {
+                int affectedRows = await _bloc.remove(state.stateId);
+                if (affectedRows > 0) widget.country.states.remove(state);
+              },
+              child: ListTile(
+                title: Text(state.name),
+              ));
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -33,7 +44,7 @@ class _StatePageState extends State<StatePage> {
               context,
               MaterialPageRoute(
                   builder: (context) => AddStatePage(widget.country)));
-          widget.country.states.add(state);
+          if (state != null) widget.country.states.add(state);
         },
       ),
     );

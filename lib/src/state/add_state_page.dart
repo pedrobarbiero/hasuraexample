@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hasuraexample/src/app_module.dart';
+import 'package:hasuraexample/src/home/home_module.dart';
 import 'package:hasuraexample/src/models/country_model.dart';
 import 'package:hasuraexample/src/state/add_state_bloc.dart';
 
@@ -12,7 +12,7 @@ class AddStatePage extends StatefulWidget {
 }
 
 class _AddStatePageState extends State<AddStatePage> {
-  var _bloc = AppModule.to.getBloc<AddStateBloc>();
+  var _bloc = HomeModule.to.getBloc<AddStateBloc>();
 
   @override
   void initState() {

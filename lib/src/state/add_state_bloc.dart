@@ -13,8 +13,12 @@ class AddStateBloc extends BlocBase {
 
   void setCountry(CountryModel value) => _country = value;
 
-  Future<StateModel> create() async => _repository.createState(
-      StateModel(name: controllerName.text, countryId: _country.countryId));
+  Future<StateModel> create() async {
+    var state = await _repository.createState(
+        StateModel(name: controllerName.text, countryId: _country.countryId));
+    controllerName.clear();
+    return state;
+  }
 
   @override
   void dispose() {

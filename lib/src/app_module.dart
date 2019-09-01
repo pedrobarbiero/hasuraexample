@@ -1,17 +1,10 @@
-import 'package:hasuraexample/src/state/add_state_bloc.dart';
-import 'package:hasuraexample/src/state/state_bloc.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:hasuraexample/src/app_widget.dart';
-import 'package:hasuraexample/src/app_bloc.dart';
 
 class AppModule extends ModuleWidget {
   @override
-  List<Bloc> get blocs => [  
-        Bloc((i) => AddStateBloc()),
-        Bloc((i) => StateBloc()),
-        Bloc((i) => AppBloc()),
-      ]; 
+  List<Bloc> get blocs => []; 
 
   @override
   List<Dependency> get dependencies => [];

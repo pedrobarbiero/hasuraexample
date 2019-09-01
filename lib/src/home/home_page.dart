@@ -35,8 +35,7 @@ class _HomePageState extends State<HomePage> {
             return ListTile(
               title: Text(country.name),
               trailing: Icon(Icons.arrow_right),
-              onTap: () {
-                print("object");
+              onTap: () {                
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => StatePage(country)));
               },

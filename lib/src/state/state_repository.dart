@@ -23,6 +23,22 @@ class StateRepository extends Disposable {
     return StateModel(stateId: id, name: state.name);
   }
 
+  Future<int> remove(int stateId) async {
+    var query = """ 
+      mutation deleteState(\$state_id:Int){
+        delete_states(
+          where: { state_id: 
+            {_eq: \$state_id}
+          }
+        ){
+          affected_rows
+        }
+      }
+    """;
+    var data = await connection.mutation(query, variables: {"state_id": stateId});
+    return data["data"]["delete_states"]["affected_rows"] as int;
+  }
+
   @override
   void dispose() {}
 }
